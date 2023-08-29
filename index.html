@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Range Slider in HTML CSS & JavaScript</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Unicons CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+        <i class="uil uil-volume-mute" id="icon1"></i>
+        <input type="range" min="0" step="1" max="100" value="0" id="range1" />
+        <span class="slide-value">0</span>
+      </div>
+      
+      <div class="wrapper">
+        <i class="uil uil-volume-mute" id="icon2"></i>
+        <input type="range" min="0" step="1" max="100" value="0" id="range2" />
+        <span class="slide-value">0</span>
+      </div>
+      
+      <div class="wrapper">
+        <i class="uil uil-volume-mute" id="icon3"></i>
+        <input type="range" min="0" step="1" max="100" value="0" id="range3" />
+        <span class="slide-value">0</span>
+      </div>      
+
+    <script>
+    // Création d'une boucle pour gérer chaque range slider
+    for (let i = 1; i <= 3; i++) {
+        const icon = document.querySelector(`#icon${i}`);
+        const range = document.querySelector(`#range${i}`);
+        const slideValue = document.querySelector(`#range${i} + .slide-value`);
+
+    range.addEventListener("input", () => {
+        let rangeVal = range.value;
+        slideValue.innerText = rangeVal;
+
+        if (rangeVal > 0) {
+        icon.classList.replace("uil-volume-mute", "uil-volume-down");
+        } else {
+        icon.classList.replace("uil-volume-down", "uil-volume-mute");
+        }
+        if (rangeVal > 30) {
+        icon.classList.replace("uil-volume-down", "uil-volume");
+        } else {
+        icon.classList.replace("uil-volume", "uil-volume-down");
+        }
+        if (rangeVal > 80) {
+        icon.classList.replace("uil-volume", "uil-volume-up");
+        } else {
+        icon.classList.replace("uil-volume-up", "uil-volume");
+        }
+    });
+    }
+    </script>
+  </body>
+</html>
