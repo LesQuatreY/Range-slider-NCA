@@ -75,16 +75,3 @@ input::-webkit-slider-thumb {
     color: #2c2961;
     margin-bottom: 10px;
 }
-
-.wrapper input {
-    max-width: 400px;
-    width: 100%;
-    margin: 0 auto;
-    appearance: none;
-    height: 18px;
-    border-radius: 25px;
-    background-color: #ededed;
-    box-shadow: 0 0 0 2px #ededed;
-    overflow: hidden;
-    cursor: pointer;
-}
