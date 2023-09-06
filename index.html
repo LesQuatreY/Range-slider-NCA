@@ -10,67 +10,62 @@
 </head>
 <body>
   <div class="container">
-    <div class="wrapper">
-      <label class="slider-label">Consommation de viande</label>
-      <div>
-        <input type="range" min="0" step="1" max="20" value="0" id="range1" />
-        <span class="slide-value" id="value1">0</span>
+      <div class="wrapper">
+          <label class="slider-label">Consommation de viande</label>
+          <input type="range" min="0" step="1" max="20" value="0" id="range1" />
+          <span class="slide-value" id="value1">0</span>
       </div>
-    </div>
-    <div class="wrapper">
-      <label class="slider-label">Consommation de viande rouge</label>
-      <div>
-        <input type="range" min="0" step="1" max="20" value="0" id="range2" />
-        <span class="slide-value" id="value2">0</span>
-      </div>
-    </div>
-    <div class="wrapper">
-      <label class="slider-label">Km de voiture</label>
-      <div>
-        <input type="range" min="0" step="1" max="20" value="0" id="range3" />
-        <span class="slide-value" id="value3">0</span>
-      </div>
-    </div>
-    <div class="wrapper">
-      <label class="slider-label">Km d'avion</label>
-      <div>
-        <input type="range" min="0" step="1" max="20" value="0" id="range4" />
-        <span class="slide-value" id="value4">0</span>
-      </div>
-    </div>
 
-    <div class="wrapper-total">
-      <div id="result">Total : <span id="sum">0</span></div>
-    </div>
+      <div class="wrapper">
+          <label class="slider-label">Consommation de viande rouge</label>
+          <input type="range" min="0" step="1" max="20" value="0" id="range2" />
+          <span class="slide-value" id="value2">0</span>
+      </div>
+
+      <div class="wrapper">
+          <label class="slider-label">Km de voiture</label>
+          <input type="range" min="0" step="1" max="1000" value="0" id="range3" />
+          <span class="slide-value" id="value3">0</span>
+      </div>
+
+      <div class="wrapper">
+          <label class="slider-label">Km d'avion</label>
+          <input type="range" min="0" step="1" max="1000" value="0" id="range4" />
+          <span class="slide-value" id="value4">0</span>
+      </div>
+
+      <div class="wrapper">
+        <div id="result">Total <span id="sum">0</span></div>
+      </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const sliders = [];
+      document.addEventListener("DOMContentLoaded", function () {
+          const sliders = [];
 
-      for (let i = 1; i <= 4; i++) {
-        const range = document.querySelector(`#range${i}`);
-        const slideValue = document.querySelector(`#value${i}`);
+          for (let i = 1; i <= 4; i++) {
+              const range = document.querySelector(`#range${i}`);
+              const slideValue = document.querySelector(`#value${i}`);
 
-        sliders.push({ range, slideValue });
+              sliders.push({ range, slideValue });
 
-        // Mettre à jour la valeur affichée en temps réel
-        range.addEventListener("input", () => {
-          slideValue.textContent = range.value;
+              // Mettre à jour la valeur affichée en temps réel
+              range.addEventListener("input", () => {
+                  slideValue.textContent = range.value;
+                  calculateSum();
+              });
+          }
+
+          function calculateSum() {
+              let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value), 0);
+
+              const sumSpan = document.getElementById("sum");
+              sumSpan.textContent = totalSum;
+          }
+
+          // Calculer la somme initiale
           calculateSum();
-        });
-      }
-
-      function calculateSum() {
-        let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value), 0);
-
-        const sumSpan = document.getElementById("sum");
-        sumSpan.textContent = totalSum;
-      }
-
-      // Calculer la somme initiale
-      calculateSum();
-    });
+      });
   </script>
 </body>
 </html>
