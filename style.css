@@ -64,4 +64,27 @@ input::-webkit-slider-thumb {
 .container {
     margin-bottom: 200px; /* Ajoutez l'espace vertical entre les range sliders */
   }
-  
+  .wrapper {
+    text-align: center;
+    padding: 10px 20px; /* Espacement en haut et en bas de chaque .wrapper */
+}
+
+.slider-label { /* Texte pour montrer à quoi correspond chaque sliders */
+    display: block;
+    font-size: 14px;
+    color: #2c2961;
+    margin-bottom: 10px;
+}
+
+.wrapper input {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    appearance: none;
+    height: 18px;
+    border-radius: 25px;
+    background-color: #ededed;
+    box-shadow: 0 0 0 2px #ededed;
+    overflow: hidden;
+    cursor: pointer;
+}
