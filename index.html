@@ -11,51 +11,63 @@
 <body>
   <div class="wrapper">
     <!-- <i class="uil uil-volume-mute" id="icon1"></i> */ -->
-    <input type="range" min="0" step="1" max="100" value="0" id="range1" />
+    <input type="range" min="0" step="1" max="20" value="0" id="range1" />
     <span class="slide-value">0</span>
   </div>
   
   <div class="wrapper">
     <!--  <i class="uil uil-volume-mute" id="icon2"></i> -->
-    <input type="range" min="0" step="1" max="100" value="0" id="range2" />
+    <input type="range" min="0" step="1" max="20" value="0" id="range2" />
     <span class="slide-value">0</span>
   </div>
   
   <div class="wrapper">
     <!--  <i class="uil uil-volume-mute" id="icon3"></i> -->
-    <input type="range" min="0" step="1" max="100" value="0" id="range3" />
+    <input type="range" min="0" step="1" max="1000" value="0" id="range3" />
     <span class="slide-value">0</span>
-  </div>      
+  </div>       
+  
+  <div class="wrapper">
+    <!--  <i class="uil uil-volume-mute" id="icon3"></i> -->
+    <input type="range" min="0" step="1" max="1000" value="0" id="range4" />
+    <span class="slide-value">0</span>
+  </div>
 
-  <script>
-    const sliders = [];
-    const maxSum = 100;
+<script>
+  const sliders = [];
+  const maxSum = 200;
 
-    for (let i = 1; i <= 3; i++) {
-      const icon = document.querySelector(`#icon${i}`);
-      const range = document.querySelector(`#range${i}`);
-      const slideValue = document.querySelector(`#range${i} + .slide-value`);
+  // Définir les coefficients pour chaque curseur
+  const coefficients = [2, 2, 0.5, 0.5];
 
-      sliders.push({ range, slideValue });
+  for (let i = 1; i <= 4; i++) {
+    const icon = document.querySelector(`#icon${i}`);
+    const range = document.querySelector(`#range${i}`);
+    const slideValue = document.querySelector(`#range${i} + .slide-value`);
+    
+    // Utiliser le coefficient correspondant
+    const coefficient = coefficients[i - 1];
 
-      range.addEventListener("input", () => {
-        let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value), 0);
-        
-        // Si la somme dépasse maxSum, ajuster les autres sliders de manière proportionnelle
-        if (totalSum > maxSum) {
-          sliders.forEach((slider) => {
-            const newValue = (parseInt(slider.range.value) * maxSum) / totalSum;
-            slider.range.value = Math.round(newValue);
-            slider.slideValue.innerText = slider.range.value;
-          });
-        } else {
-          slideValue.innerText = range.value;
-        }
+    sliders.push({ range, slideValue, coefficient });
 
-        let rangeVal = range.value;
-        // ... (votre code d'icônes)
-      });
-    }
-  </script>
+    range.addEventListener("input", () => {
+      let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value) * slider.coefficient, 0);
+      
+      // Si la somme dépasse maxSum, ajuster les autres curseurs de manière proportionnelle
+      if (totalSum > maxSum) {
+        sliders.forEach((slider) => {
+          const newValue = (parseInt(slider.range.value) * maxSum) / totalSum;
+          slider.range.value = Math.round(newValue);
+          slider.slideValue.innerText = slider.range.value;
+        });
+      } else {
+        slideValue.innerText = range.value;
+      }
+
+      let rangeVal = range.value;
+    });
+  }
+</script>
+
 </body>
 </html>
