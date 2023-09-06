@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Range Slider in HTML CSS & JavaScript</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculateur de somme</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 <body>
-  <div class="container">
-      <div class="wrapper">
+    <div class="container">
+        <div class="wrapper">
           <label class="slider-label">Consommation de viande</label>
-          <input type="range" min="0" step="1" max="20" value="0" id="range1" />
-          <span class="slide-value" id="value1">0</span>
-      </div>
-
-      <div class="wrapper">
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range1" />
+            <span class="slide-value" id="value1">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
           <label class="slider-label">Consommation de viande rouge</label>
-          <input type="range" min="0" step="1" max="20" value="0" id="range2" />
-          <span class="slide-value" id="value2">0</span>
-      </div>
-
-      <div class="wrapper">
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range2" />
+            <span class="slide-value" id="value2">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
           <label class="slider-label">Km de voiture</label>
-          <input type="range" min="0" step="1" max="1000" value="0" id="range3" />
-          <span class="slide-value" id="value3">0</span>
-      </div>
-
-      <div class="wrapper">
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range3" />
+            <span class="slide-value" id="value3">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
           <label class="slider-label">Km d'avion</label>
-          <input type="range" min="0" step="1" max="1000" value="0" id="range4" />
-          <span class="slide-value" id="value4">0</span>
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range4" />
+            <span class="slide-value" id="value4">0</span>
+          </div>
+        </div>
+    
+        <div class="wrapper-total">
+          <div id="result">Total : <span id="sum">0</span></div>
+        </div>
       </div>
 
-      <div class="wrapper">
-        <div id="result">Total <span id="sum">0</span></div>
-      </div>
-  </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sliders = [];
+            const maxSum = 50;
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const sliders = [];
+            // Définir les coefficients pour chaque curseur
+            const coefficients = [2, 2, 0.5, 0.5];
 
-          for (let i = 1; i <= 4; i++) {
-              const range = document.querySelector(`#range${i}`);
-              const slideValue = document.querySelector(`#value${i}`);
+            for (let i = 1; i <= 4; i++) {
+                const range = document.querySelector(`#range${i}`);
+                const slideValue = document.querySelector(`#value${i}`);
 
-              sliders.push({ range, slideValue });
+                // Utiliser le coefficient correspondant
+                const coefficient = coefficients[i - 1];
 
-              // Mettre à jour la valeur affichée en temps réel
-              range.addEventListener("input", () => {
-                  slideValue.textContent = range.value;
-                  calculateSum();
-              });
-          }
+                sliders.push({ range, slideValue, coefficient });
 
-          function calculateSum() {
-              let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value), 0);
+                // Mettre à jour la valeur affichée en temps réel
+                range.addEventListener("input", () => {
+                    slideValue.textContent = range.value;
+                    calculateSum();
+                });
+            }
 
-              const sumSpan = document.getElementById("sum");
-              sumSpan.textContent = totalSum;
-          }
+            function calculateSum() {
+                let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value) * slider.coefficient, 0);
 
-          // Calculer la somme initiale
-          calculateSum();
-      });
-  </script>
+                // Si la somme dépasse maxSum, ajuster les autres curseurs de manière proportionnelle
+                if (totalSum > maxSum) {
+                    sliders.forEach((slider) => {
+                        const newValue = (parseInt(slider.range.value) * maxSum) / totalSum;
+                        slider.range.value = Math.round(newValue);
+                        slider.slideValue.textContent = slider.range.value;
+                    });
+                    totalSum = maxSum;
+                }
+
+                const sumSpan = document.getElementById("sum");
+                sumSpan.textContent = totalSum;
+            }
+
+            // Calculer la somme initiale
+            calculateSum();
+        });
+    </script>
 </body>
 </html>
