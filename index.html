@@ -11,34 +11,61 @@
 <body>
     <div class="container">
         <div class="wrapper">
-          <label class="slider-label">Consommation de viande</label>
+          <label class="slider-label"> Km de voiture </label>
           <div>
-            <input type="range" min="0" step="1" max="20" value="0" id="range1" />
+            <input type="range" min="0" step="100" max="30000" value="0" id="range1" />
             <span class="slide-value" id="value1">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label">Consommation de viande rouge</label>
+          <label class="slider-label"> Km d'avion </label>
           <div>
-            <input type="range" min="0" step="1" max="20" value="0" id="range2" />
+            <input type="range" min="0" step="250" max="10000" value="0" id="range2" />
             <span class="slide-value" id="value2">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label">Km de voiture</label>
+          <label class="slider-label"> Nbr de repas viande par semaine </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range3" />
             <span class="slide-value" id="value3">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label">Km d'avion</label>
+          <label class="slider-label"> Nbr de repas poisson par semaine </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range4" />
             <span class="slide-value" id="value4">0</span>
           </div>
         </div>
-    
+        <div class="wrapper">
+          <label class="slider-label"> Nbr de repas sans viande par semaine </label>
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range5" />
+            <span class="slide-value" id="value5">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
+          <label class="slider-label">métre carré d'habitation</label>
+          <div>
+            <input type="range" min="0" step="1" max="1" value="0" id="range6" />
+            <span class="slide-value" id="value6">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
+          <label class="slider-label"> Nbr d'achats de vêtements </label>
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range7" />
+            <span class="slide-value" id="value7">0</span>
+          </div>
+        </div>
+        <div class="wrapper">
+          <label class="slider-label"> Nbr d'achats électroménager </label>
+          <div>
+            <input type="range" min="0" step="1" max="20" value="0" id="range8" />
+            <span class="slide-value" id="value8">0</span>
+          </div>
+        </div>
         <div class="wrapper-total">
           <div id="result">Total : <span id="sum">0</span></div>
         </div>
@@ -47,12 +74,12 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const sliders = [];
-            const maxSum = 50;
+            const maxSum = 2000-1400;
 
             // Définir les coefficients pour chaque curseur
-            const coefficients = [2, 2, 0.5, 0.5];
+            const coefficients = [0, 0, 0, 0, 0, 0, 0, 0];
 
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 8; i++) {
                 const range = document.querySelector(`#range${i}`);
                 const slideValue = document.querySelector(`#value${i}`);
 
@@ -82,7 +109,7 @@
                 }
 
                 const sumSpan = document.getElementById("sum");
-                sumSpan.textContent = totalSum;
+                sumSpan.textContent = totalSum + 1400;
             }
 
             // Calculer la somme initiale
