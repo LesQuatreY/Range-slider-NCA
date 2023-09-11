@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container">
+        <div class="grid-container 1">
         <div class="wrapper">
           <label class="slider-label"> Km de voiture </label>
           <div>
@@ -32,12 +33,15 @@
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr de repas poisson par semaine </label>
-          <div>
+          <label class="slider-label"> Nbr de repas poisson par semaine</label>
+    
+            <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range4" />
             <span class="slide-value" id="value4">0</span>
+        </div>
           </div>
         </div>
+        <div class="grid-container 1">
         <div class="wrapper">
           <label class="slider-label"> Nbr de repas sans viande par semaine </label>
           <div>
@@ -46,28 +50,31 @@
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label">métre carré d'habitation</label>
+          <label class="slider-label">m carré habitat</label>
           <div>
             <input type="range" min="0" step="1" max="1" value="0" id="range6" />
             <span class="slide-value" id="value6">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr d'achats de vêtements </label>
+          <label class="slider-label"> Nbr d'achats vêtements </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range7" />
             <span class="slide-value" id="value7">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr d'achats électroménager </label>
+          <label class="slider-label"> Nbr d'achats maison </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range8" />
             <span class="slide-value" id="value8">0</span>
           </div>
         </div>
+        </div>
+        <div class="grid-container total-row"> 
         <div class="wrapper-total">
           <div id="result">Total : <span id="sum">0</span></div>
+        </div>
         </div>
       </div>
 
@@ -77,7 +84,7 @@
             const maxSum = 2000-1400;
 
             // Définir les coefficients pour chaque curseur
-            const coefficients = [0, 0, 0, 0, 0, 0, 0, 0];
+            const coefficients = [1, 1, 1, 1, 1, 1, 1, 1];
 
             for (let i = 1; i <= 8; i++) {
                 const range = document.querySelector(`#range${i}`);
