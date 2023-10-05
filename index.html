@@ -10,7 +10,15 @@
 </head>
 <body>
     <div class="container">
-        <div class="grid-container 1">
+        <div class="pre-question">
+          <label for="car-type">Quel type de voiture avez-vous ?</label>
+          <select id="car-type">
+              <option value="diesel">Diesel</option>
+              <option value="essence">Essence</option>
+              <option value="electrique">Électrique</option>
+          </select>
+      </div>
+      <div class="grid-container 1">
         <div class="wrapper">
           <label class="slider-label"> Km de voiture </label>
           <div>
@@ -52,7 +60,7 @@
         <div class="wrapper">
           <label class="slider-label">m carré habitat</label>
           <div>
-            <input type="range" min="0" step="1" max="1" value="0" id="range6" />
+            <input type="range" min="0" step="1" max="1000" value="0" id="range6" />
             <span class="slide-value" id="value6">0</span>
           </div>
         </div>
@@ -64,7 +72,7 @@
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr d'achats maison </label>
+          <label class="slider-label"> Nbr d'achats électroniques </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range8" />
             <span class="slide-value" id="value8">0</span>
@@ -79,49 +87,68 @@
       </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sliders = [];
-            const maxSum = 2000-1400;
+document.addEventListener("DOMContentLoaded", function () {
+    const sliders = Array.from(document.querySelectorAll('input[type="range"]'));
+    const maxSum = 2000 - 900;
 
-            // Définir les coefficients pour chaque curseur
-            const coefficients = [1, 1, 1, 1, 1, 1, 1, 1];
+    // Définir les coefficients pour chaque curseur
+    const coefficients = [0, 0.025+0.120+0.120, 7.26, 3, 0.51, 550, 15, 226];
+    const carTypeSelect = document.getElementById("car-type");
 
-            for (let i = 1; i <= 8; i++) {
-                const range = document.querySelector(`#range${i}`);
-                const slideValue = document.querySelector(`#value${i}`);
+    // Fonction pour mettre à jour les coefficients en fonction de la réponse à la question préalable
+    function updateCoefficients() {
+        const selectedCarType = carTypeSelect.value;
+        // Mettre à jour les coefficients en fonction de la réponse
+        if (selectedCarType === "diesel") {
+            coefficients[0] = 0.026+0.037+0.150;
+        } else if (selectedCarType === "essence") {
+            coefficients[0] = 0.026+0.036+0.162;
+        } else if (selectedCarType === "electrique") {
+            coefficients[0] = 0.112+0.027;
+        }
+        calculateSum();
+    }
 
-                // Utiliser le coefficient correspondant
-                const coefficient = coefficients[i - 1];
+    carTypeSelect.addEventListener("change", () => {
+        updateCoefficients();
+    });
 
-                sliders.push({ range, slideValue, coefficient });
+    // Appelez la fonction d'initialisation des coefficients au chargement de la page
+    updateCoefficients();
 
-                // Mettre à jour la valeur affichée en temps réel
-                range.addEventListener("input", () => {
-                    slideValue.textContent = range.value;
-                    calculateSum();
-                });
-            }
+    sliders.forEach((slider, index) => {
+        const slideValue = document.getElementById(`value${index + 1}`);
+        const coefficient = coefficients[index];
 
-            function calculateSum() {
-                let totalSum = sliders.reduce((sum, slider) => sum + parseInt(slider.range.value) * slider.coefficient, 0);
-
-                // Si la somme dépasse maxSum, ajuster les autres curseurs de manière proportionnelle
-                if (totalSum > maxSum) {
-                    sliders.forEach((slider) => {
-                        const newValue = (parseInt(slider.range.value) * maxSum) / totalSum;
-                        slider.range.value = Math.round(newValue);
-                        slider.slideValue.textContent = slider.range.value;
-                    });
-                    totalSum = maxSum;
-                }
-
-                const sumSpan = document.getElementById("sum");
-                sumSpan.textContent = totalSum + 1400;
-            }
-
-            // Calculer la somme initiale
+        // Mettre à jour la valeur affichée en temps réel
+        slider.addEventListener("input", () => {
+            slideValue.textContent = slider.value;
             calculateSum();
         });
+    });
+
+    function calculateSum() {
+        let totalSum = sliders.reduce((sum, slider, index) => {
+            return sum + parseInt(slider.value) * coefficients[index];
+        }, 0);
+
+        // Si la somme dépasse maxSum, ajuster les autres curseurs de manière proportionnelle
+        if (totalSum > maxSum) {
+            sliders.forEach((slider, index) => {
+                const newValue = (parseInt(slider.value) * maxSum) / totalSum;
+                slider.value = Math.round(newValue);
+                document.getElementById(`value${index + 1}`).textContent = slider.value;
+            });
+            totalSum = maxSum;
+        }
+
+        const sumSpan = document.getElementById("sum");
+        sumSpan.textContent = totalSum + 1400;
+    }
+
+    // Calculer la somme initiale
+    calculateSum();
+});
     </script>
 </body>
 </html>
