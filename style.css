@@ -72,7 +72,7 @@ input::-webkit-slider-thumb {
   box-shadow: -208px 0 0 200px #2c2961;
 }
 .wrapper .slide-value {
-  font-size: 27px;
+  font-size: 30px;
   font-weight: 500;
   color: #333;
   width: 70px;
@@ -114,4 +114,38 @@ input::-webkit-slider-thumb {
     grid-row: 3;
     display: flex;
     justify-content: center;
+  }
+  .wrapper .slider-label { /* responsive : changer la largeur des textes */
+    display: block;
+    font-size: 14px;
+    color: #2c2961;
+    margin-bottom: 10px;
+    /* Ajoutez ces propriétés pour gérer le texte long */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  @media screen and (max-width: 599px) {
+    .wrapper .slider-label {
+      font-size: 10px; /* Définissez la taille de police plus petite */
+    }
+    .wrapper .slide-value {
+      font-size: 15px; /* Définissez la taille de police plus petite */
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .wrapper .slider-label {
+      font-size: 9px; /* Définissez la taille de police plus petite */
+    }
+    .wrapper .slide-value {
+      font-size: 15px; /* Définissez la taille de police plus petite */
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .wrapper .slider-label {
+      font-size: 7.5px; /* Définissez la taille de police plus petite */
+    }
+    .wrapper .slide-value {
+      font-size: 15px; /* Définissez la taille de police plus petite */
+    }
   }
