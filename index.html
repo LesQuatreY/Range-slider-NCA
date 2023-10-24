@@ -20,28 +20,28 @@
       </div>
       <div class="grid-container 1">
         <div class="wrapper">
-          <label class="slider-label"> Km de voiture </label>
+          <label class="slider-label"> Km de voiture par an </label>
           <div>
             <input type="range" min="0" step="100" max="30000" value="0" id="range1" />
             <span class="slide-value" id="value1">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Km d'avion </label>
+          <label class="slider-label"> Km d'avion par an</label>
           <div>
             <input type="range" min="0" step="250" max="10000" value="0" id="range2" />
             <span class="slide-value" id="value2">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr de repas viande par semaine </label>
+          <label class="slider-label"> Nbr repas viande par semaine </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range3" />
             <span class="slide-value" id="value3">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr de repas poisson par semaine</label>
+          <label class="slider-label"> Nbr repas poisson par semaine</label>
     
             <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range4" />
@@ -51,28 +51,28 @@
         </div>
         <div class="grid-container 1">
         <div class="wrapper">
-          <label class="slider-label"> Nbr de repas sans viande par semaine </label>
+          <label class="slider-label"> Nbr repas sans viande par semaine</label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range5" />
             <span class="slide-value" id="value5">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label">m carré habitat</label>
+          <label class="slider-label">mètre carré habitat</label>
           <div>
             <input type="range" min="0" step="1" max="1000" value="0" id="range6" />
             <span class="slide-value" id="value6">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr d'achats vêtements </label>
+          <label class="slider-label"> Nbr achats vêtements </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range7" />
             <span class="slide-value" id="value7">0</span>
           </div>
         </div>
         <div class="wrapper">
-          <label class="slider-label"> Nbr d'achats électroniques </label>
+          <label class="slider-label"> Nbr achats électroniques </label>
           <div>
             <input type="range" min="0" step="1" max="20" value="0" id="range8" />
             <span class="slide-value" id="value8">0</span>
@@ -89,10 +89,10 @@
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     const sliders = Array.from(document.querySelectorAll('input[type="range"]'));
-    const maxSum = 2000 - 900;
+    const maxSum = 1400/4;
 
     // Définir les coefficients pour chaque curseur
-    const coefficients = [0, 0.025+0.120+0.120, 7.26, 3, 0.51, 550, 15, 226];
+    const coefficients = [0, 0.025+0.120+0.120, 54*7.26, 54*3, 54*0.51, 550, 15, 226];
     const carTypeSelect = document.getElementById("car-type");
 
     // Fonction pour mettre à jour les coefficients en fonction de la réponse à la question préalable
